@@ -1,13 +1,12 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import SearchContent from './SearchContent';
+import {IBookInfo} from './interfaces';
+
 
 const Search: React.FC = () => {
 
-    const [bookList, setBookList] = useState<Array<Object> | null>(null); 
+    const [bookList, setBookList] = useState<Array<IBookInfo>>([]); 
     const [userInputTitle, setUserInputTitle] = useState<string>('');  
-    const [cover, setCover] = useState<JSX.Element>();
-    const [bookTitle, setBookTitle] = useState<string>('');
-    const [author, setAuthor] = useState<string>('');
     const [timerID, setTimerID] = useState<number>(0);
     const [loader, setLoader] = useState<boolean>(false);
     const [start, setStart] = useState<boolean>(false);
@@ -16,24 +15,9 @@ const Search: React.FC = () => {
 
     const searchRef = useRef<HTMLInputElement | null>(null);
     const submitRef = useRef<HTMLInputElement | null>(null);
+
     let isError: boolean = false;
-
-    useEffect(() => {
-        if (bookList) {
-            setBookList([...bookList, {
-                    cover: <img src={`http://covers.openlibrary.org/b/id/${cover}-S.jpg`} alt=""/> , 
-                    title: bookTitle,
-                    author: author
-                }
-            ]);
-        } else if (cover) setBookList([{
-                cover: <img src={`http://covers.openlibrary.org/b/id/${cover}-S.jpg`} alt=""/> , 
-                title: bookTitle,
-                author: author
-            }]);
-    }, [cover]);
-
-   
+    let books: IBookInfo[] = [];
 
     useEffect(() => {
         if (timerID) clearTimeout(timerID);
@@ -41,24 +25,30 @@ const Search: React.FC = () => {
     }, [userInputTitle]);
 
     function bookRequest(): void {
-        setBookList(null);
+        setBookList([]);
         setLoader(true);
         setError('');
         fetch(`http://openlibrary.org/search.json?title=${userInputTitle}`)
             .then(response => response.json())
             .then(data => data.docs.map((e: any, i: number) => {
-                    if (e.cover_i) {
-                        setBookTitle(e.title);
-                        setAuthor(e.author_name);
-                        setCover(e.cover_i);
+                     if (e.cover_i) {
+                        books = [...books, {
+                            coverS: `http://covers.openlibrary.org/b/id/${e.cover_i}-S.jpg`,
+                            coverM: `http://covers.openlibrary.org/b/id/${e.cover_i}-M.jpg`,
+                            bookKeyOL: e.key.slice(7, -1) + 'M.json',
+                            bookKeyW: e.key + '.json',
+                            title: e.title,
+                            author: e.author_name,
+                        }];
                         isError = true;
-                    };
-                    return e; 
+                    }
                 })
             )
             .catch(err => console.log('Error ' + err))
             .finally(() => {
                 setLoader(false);
+                setBookList(books);
+                books = [];
                 if (!isError) setError('Ничего не найдено ☹');
             });
     };
@@ -71,11 +61,10 @@ const Search: React.FC = () => {
 
     function handleFocus(): void {
         if (searchRef && submitRef) {
-            if (!searchRef.current?.classList.contains('open') && !submitRef.current?.classList.contains('open')) { //&& !divRef.current?.classList.contains('open')
+            if (!searchRef.current?.classList.contains('open') && !submitRef.current?.classList.contains('open')) {
                 searchRef.current!.classList.add('open');
                 submitRef.current!.classList.add('open');
                 setIsOpen(true);
-                //
             }
         }
     };

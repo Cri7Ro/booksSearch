@@ -66,5 +66,20 @@ code {
                 }
             }
         }
+        .selected-book {
+            position: fixed;
+            top: 30vh;
+            left: 50vw;
+            transform: translateX(-50%);
+            color: white;
+            background-color: #fff;
+            color: black;
+            display: flex;
+            flex-direction: column;
+            overflow-y: scroll;
+            &-content {
+                display: flex;
+            }
+        }
     }
 }
