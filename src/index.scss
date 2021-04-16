@@ -1,13 +1,70 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: black;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+.main-container {
+    display: flex;
+    justify-content: center;
+    .main-content {
+        .snippet-books {
+            background-color: white;
+            padding: .5rem 0;
+            display: none;
+            &.open {
+                display: block;
+            }
+        }
+        ul {
+            li {
+                display: flex;
+                margin-bottom: 3rem;
+                align-items: center;
+                padding-left: .5rem;
+                gap: 15px;
+                cursor: pointer;
+            }
+            li:last-child {
+                margin-bottom: 0;
+            }
+            max-height: 50vh;
+            overflow-y: scroll;
+        }
+        .search-form {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .search {
+                width: 50vw;
+                padding: 1.2rem 1rem;
+                border: 0;
+                border-radius: 25px 0 0 25px;
+                &:focus {
+                    outline: none;
+                }
+                &.open {
+                    border-radius: 15px 0 0 0;
+                }
+            }
+            .submit {
+                padding: 1.2rem 1rem;
+                border: 0;
+                border-radius: 0 25px 25px 0;
+                &:focus {
+                    outline: none;
+                }
+                cursor: pointer;
+                &.open {
+                    border-radius: 0 15px 0 0;
+                }
+            }
+        }
+    }
 }
