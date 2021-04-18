@@ -10,6 +10,16 @@ code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
+.header-container {
+    display: flex;
+    justify-content: flex-end;
+    color: white;
+    .nav-links {
+        display: flex;
+        gap: 1rem;
+    }
+}
+
 .main-container {
     display: flex;
     justify-content: center;
@@ -67,18 +77,39 @@ code {
             }
         }
         .selected-book {
-            position: fixed;
-            top: 30vh;
-            left: 50vw;
-            transform: translateX(-50%);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
             color: white;
-            background-color: #fff;
+            background-color: rgba(0, 0, 0, 0.4);
             color: black;
             display: flex;
             flex-direction: column;
             overflow-y: scroll;
-            &-content {
-                display: flex;
+            padding-top: 30vh;
+            padding-left: 50vw;
+            .modal {
+                position: relative;
+                overflow: scroll;
+                width: 50vw;
+                background-color: #fff;
+                transform: translateX(-50%);
+                padding: 1rem;
+                .selected-book-content {
+                    display: flex;
+                }
+                button {
+                    position: absolute;
+                    right: 0;
+                    border: none;
+                    background: none;
+                    cursor: pointer;
+                    &:focus {
+                        outline: none;
+                    }
+                }
             }
         }
     }

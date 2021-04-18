@@ -1,8 +1,6 @@
 export interface IBookInfo {
     coverS: string,
     coverM: string,
-    bookKeyOL: string,
-    bookKeyW: string,
     title: string,
     author: string
     publish_date?: string,

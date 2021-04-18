@@ -7,7 +7,6 @@ const SearchContent: React.FC<ISearch> = ({searchRef, submitRef, bookList, loade
     const [isVisible, setIsVisible] = useState<boolean>(false);
     const [currBook, setCurrBook] = useState<number | null>(null);
 
-
     useLayoutEffect(() => {
         if (divRef && searchRef && submitRef && bookList) {
             let searchWidth = searchRef.clientWidth;
@@ -52,10 +51,8 @@ const SearchContent: React.FC<ISearch> = ({searchRef, submitRef, bookList, loade
                                         <li key={i.toString()}  data-index={i}>
                                             <img src={e.coverS} alt="" data-index={i}/>  
                                             <div className='snippet-text'>
-                                                <p data-index={i}>{e.title}</p>
-                                                <p data-index={i}>{e.author}</p>
-                                                <p data-index={i}>{e.bookKeyOL}</p>
-                                                <p data-index={i}>{e.bookKeyW}</p>
+                                                <p data-index={i}>Title: {e.title}</p>
+                                                <p data-index={i}>Author: {e.author}</p>
                                             </div>
                                         </li> 
                                     ) 
