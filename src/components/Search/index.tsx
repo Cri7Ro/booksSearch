@@ -30,7 +30,7 @@ const Search: React.FC = () => {
         setError('');
         try {
             const data = await get(`http://openlibrary.org/search.json?title=${userInputTitle}`);
-            if (data.numFound === 0) throw new Error;
+            if (data.numFound === 0) throw new Error();
             else data.docs.map(async (e: any, i: number) => {
                     if (e.cover_i) {
                         isError = true;

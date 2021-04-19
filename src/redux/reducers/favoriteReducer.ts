@@ -1,5 +1,4 @@
 import {IFavoriteBooks, IFavoriteAction} from '../../interfaces';
-import {IBookInfo} from '../../interfaces';
 
 const ADD_FAVORITE_BOOK = 'ADD_FAVORITE_BOOK';
 const DELETE_FAVORITE_BOOK = 'DELETE_FAVORITE_BOOK';

@@ -10,7 +10,9 @@ const SelectedBook: React.FC<Iinfo> = ({setIsVisible, currBook, bookList}) => {
     const favoriteBooks = useTypedSelector(state => state.books);
 
     useEffect(() => {
-        favoriteBooks.books.map(e => e === bookList![currBook!] ? setIsFavorite(true) : e = e);
+        favoriteBooks.books.map(e => {
+            if (JSON.stringify(e) === JSON.stringify(bookList![currBook!])) setIsFavorite(true);
+        });
     }, []);
 
     useEffect(() => {
@@ -30,8 +32,8 @@ const SelectedBook: React.FC<Iinfo> = ({setIsVisible, currBook, bookList}) => {
                     <div className='selected-book-content'>
                         <img src={bookList[currBook!].coverM} alt=""/>
                         <div>
-                            <p>Author: {bookList[currBook!].title}</p>
-                            <p>Title: {bookList[currBook!].author}</p>
+                            <p>Title: {bookList[currBook!].title}</p>
+                            <p>Author: {bookList[currBook!].author}</p>
                             <p>Publish date: {bookList[currBook!].publish_date}</p>
                             <p>Publishers: {bookList[currBook!].publishers}</p>
                             <p>ISBN10: {bookList[currBook!].isbn10}</p>
