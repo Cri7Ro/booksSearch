@@ -12,6 +12,7 @@ const SelectedBook: React.FC<Iinfo> = ({setIsVisible, currBook, bookList}) => {
     useEffect(() => {
         favoriteBooks.books.map(e => {
             if (JSON.stringify(e) === JSON.stringify(bookList![currBook!])) setIsFavorite(true);
+            return e;
         });
     }, []);
 

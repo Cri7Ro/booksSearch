@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Search from './components/Search';
 import Header from './components/Header';
 import FavoriteBooks from './components/Favorites';
