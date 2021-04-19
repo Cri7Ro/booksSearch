@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import useFetch from '../../hooks/useFetch';
 import SearchContent from './SearchContent';
-import {IBookInfo} from './interfaces';
+import {IBookInfo} from '../../interfaces';
 
 const Search: React.FC = () => {
 

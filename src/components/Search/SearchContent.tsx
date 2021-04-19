@@ -1,6 +1,6 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import SelectedBook from './SelectedBook';
-import {ISearch} from './interfaces';
+import {ISearch} from '../../interfaces';
 
 const SearchContent: React.FC<ISearch> = ({searchRef, submitRef, bookList, loader, error, isOpen, setIsOpen}) => {
     const divRef = useRef<HTMLDivElement | null>(null);

@@ -1,6 +1,6 @@
 export interface IBookInfo {
     coverS: string,
-    coverM: string,
+    coverM?: string,
     title: string,
     author: string
     publish_date?: string,
@@ -25,4 +25,13 @@ export interface ISearch {
     error: string,
     isOpen: boolean,
     setIsOpen: (value: boolean | ((prevHeight: boolean) => boolean)) => void,
+};
+
+export interface IFavoriteBooks {
+    books: IBookInfo[]
+};
+
+export interface IFavoriteAction {
+    type: string,
+    payload: any
 };
