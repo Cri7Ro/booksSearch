@@ -70,7 +70,9 @@ const Search: React.FC = () => {
         if (!loader) bookRequest();
     };
 
-    function handleFocus(): void {
+    function handleChange(event: React.SyntheticEvent<HTMLInputElement>): void {
+        setStart(true);
+        if (event.target instanceof HTMLInputElement) setUserInputTitle(event.target.value);
         if (searchRef && submitRef) {
             if (!searchRef.current?.classList.contains('open') && !submitRef.current?.classList.contains('open')) {
                 searchRef.current!.classList.add('open');
@@ -86,10 +88,9 @@ const Search: React.FC = () => {
                 <input 
                     className='search'
                     ref={searchRef}
-                    onFocus={handleFocus}
                     type="text"
                     value={userInputTitle}
-                    onChange={e => {setStart(true); setUserInputTitle(e.target.value)}}
+                    onChange={handleChange}
                     placeholder='Введите название книги'
                 />
                 <input className='submit' type="submit" ref={submitRef}/>
