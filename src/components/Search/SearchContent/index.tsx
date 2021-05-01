@@ -2,42 +2,39 @@ import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import SelectedBook from '../SelectedBook';
 import {ISearch} from '../../../interfaces';
 import BooksList from './BooksList';
+import { useTypedSelector } from '../../../hooks/useTypedSelector';
 
-const SearchContent: React.FC<ISearch> = ({searchRef, submitRef, bookList, loader, error, isOpen, setIsOpen}) => {
+const SearchContent: React.FC<ISearch> = ({searchRef, submitRef, isOpen, setIsOpen}, ref) => {
+
+    const searchBooks = useTypedSelector(state => state.search);
+
     const divRef = useRef<HTMLDivElement | null>(null);
     const [isVisible, setIsVisible] = useState<boolean>(false);
     const [currBook, setCurrBook] = useState<number | null>(null);
 
     useLayoutEffect(() => {
-        if (divRef && searchRef && submitRef && bookList) {
+        if (divRef && searchRef && submitRef && searchBooks.bookList) {
             let searchWidth = searchRef.clientWidth;
             let submitWidth = submitRef.clientWidth;
             if (divRef) divRef.current!.style.width = searchWidth + submitWidth + 'px';
         }
-    }, [divRef, searchRef, submitRef, bookList]);
+    }, [divRef, searchRef, submitRef, searchBooks.bookList]);
 
     useEffect(() => {
         if (isOpen) divRef.current!.classList.add('open');
-    }, [isOpen])
-
-    document.addEventListener('click', () => {
-        if (searchRef?.classList.contains('open') && submitRef?.classList.contains('open') && divRef.current?.classList.contains('open')) {
-            searchRef!.classList.remove('open');
-            submitRef!.classList.remove('open');
-            divRef.current!.classList.remove('open');
-            setIsOpen(false);
-        }
-    });
+        else divRef.current!.classList.remove('open');
+    }, [isOpen]);
 
     return (
         <>
             <div ref={divRef} className='snippet-books' >
                 {
-                    loader ? <p className='loading'>Поиск...</p> : 
-                        error ? <p className='error'>{error}</p> : <BooksList bookList={bookList} setIsVisible={setIsVisible} setCurrBook={setCurrBook}/>     
+                    searchBooks.loader ? <img src="./img/Book.gif" id='loader'/> : 
+                        searchBooks.error ? <p className='error'>{searchBooks.error}</p> : 
+                            <BooksList setIsVisible={setIsVisible} setCurrBook={setCurrBook}/>     
                 }
             </div>
-            {isVisible ? <SelectedBook isVisible={isVisible} setIsVisible={setIsVisible} bookList={bookList} currBook={currBook}/> : false}
+            {isVisible ? <SelectedBook isVisible={isVisible} setIsVisible={setIsVisible} currBook={currBook}/> : false}
         </>
     );
 };

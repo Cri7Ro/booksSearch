@@ -1,14 +1,17 @@
 import React from 'react';
 import {IBooksList} from '../../../interfaces';
+import { useTypedSelector } from '../../../hooks/useTypedSelector';
 
-const BooksList: React.FC<IBooksList> = ({bookList, setIsVisible, setCurrBook}) => {
+const BooksList: React.FC<IBooksList> = ({setIsVisible, setCurrBook}) => {
+
+    const searchBooks = useTypedSelector(state => state.search);
 
     function handleClick(li: React.SyntheticEvent<EventTarget>): void {
         if (!(li.target instanceof HTMLElement)) {
             return;
           }
        
-        if (bookList) {
+        if (searchBooks.bookList) {
             setIsVisible(true);
             setCurrBook(+li.target.dataset.index!)
         }
@@ -17,7 +20,7 @@ const BooksList: React.FC<IBooksList> = ({bookList, setIsVisible, setCurrBook}) 
     return (
         <ul onClick={handleClick}>
             {
-                bookList ? bookList.map((e: any, i: number) =>  
+                searchBooks.bookList ? searchBooks.bookList.map((e: any, i: number) =>  
                     <li key={i.toString()}  data-index={i}>
                         <img src={e.coverS} alt="" data-index={i}/>  
                         <div className='snippet-text'>

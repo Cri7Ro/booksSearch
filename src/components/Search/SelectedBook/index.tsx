@@ -4,15 +4,16 @@ import { useTypedSelector } from '../../../hooks/useTypedSelector';
 import {Iinfo} from '../../../interfaces';
 import BookInfo from './BookInfo';
 
-const SelectedBook: React.FC<Iinfo> = ({setIsVisible, currBook, bookList}) => {
+const SelectedBook: React.FC<Iinfo> = ({setIsVisible, currBook}) => {
     const [isFavorite, setIsFavorite] = useState<boolean>(false);
     
     const dispatchFavorites = useDispatch();
     const favoriteBooks = useTypedSelector(state => state.books);
+    const searchBooks = useTypedSelector(state => state.search);
 
     useEffect(() => {
         favoriteBooks.books.map(e => {
-            if (JSON.stringify(e) === JSON.stringify(bookList![currBook!])) setIsFavorite(true);
+            if (JSON.stringify(e) === JSON.stringify(searchBooks.bookList![currBook!])) setIsFavorite(true);
             return e;
         });
     }, []);
@@ -22,17 +23,16 @@ const SelectedBook: React.FC<Iinfo> = ({setIsVisible, currBook, bookList}) => {
     }, [favoriteBooks])
 
     function handleFavoriteClick(): void {
-        dispatchFavorites({type: 'ADD_FAVORITE_BOOK', payload: bookList![currBook!]})
+        dispatchFavorites({type: 'ADD_FAVORITE_BOOK', payload: searchBooks.bookList![currBook!]})
         setIsFavorite(true);
     }
 
     return (
         <div className='selected-book' onClick={e => setIsVisible(false)}>
-            { bookList ? 
+            { searchBooks.bookList ? 
                 <BookInfo 
                     setIsVisible={setIsVisible}
                     currBook={currBook}
-                    bookList={bookList}
                     isFavorite={isFavorite}
                     handleFavoriteClick={handleFavoriteClick}
                 /> 

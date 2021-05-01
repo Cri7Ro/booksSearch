@@ -4,6 +4,7 @@ import {NavLink} from 'react-router-dom';
 const Header: React.FC = () => {
     return (
         <header className='header-container'>
+            <h3 id='logo'>BooksSearch</h3>
             <nav className='navigation'>
                 <ul className='nav-links'>
                     <li className='nav-search'>

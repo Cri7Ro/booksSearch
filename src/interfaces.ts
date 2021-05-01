@@ -12,7 +12,6 @@ export interface IBookInfo {
 
 export interface Iinfo {
     currBook: number | null,
-    bookList: Array<IBookInfo>,
     setIsVisible: (value: boolean | ((prevHeight: boolean) => boolean)) => void,
     isVisible?: boolean,
     isFavorite?: boolean,
@@ -21,10 +20,7 @@ export interface Iinfo {
 
 export interface ISearch {
     searchRef: HTMLInputElement | null,
-    submitRef: HTMLInputElement | null,
-    bookList: Array<IBookInfo>,
-    loader: boolean,
-    error: string,
+    submitRef: HTMLButtonElement | null,
     isOpen: boolean,
     setIsOpen: (value: boolean | ((prevHeight: boolean) => boolean)) => void,
 };
@@ -33,14 +29,21 @@ export interface IFavoriteBooks {
     books: IBookInfo[]
 };
 
-export interface IFavoriteAction {
+export interface IAction {
     type: string,
     payload: any
 };
 
 type currBook = number | null;
 export interface IBooksList {
-    bookList: Array<IBookInfo>,
     setIsVisible: (value: boolean | ((prevHeight: boolean) => boolean)) => void,
     setCurrBook: (value: currBook | ((prevHeight: currBook) => currBook)) => void,
+};
+
+export type get = (url: string) => any;
+
+export interface ISearchBooks {
+    bookList?: IBookInfo[], 
+    loader?: boolean, 
+    error?: string
 };
