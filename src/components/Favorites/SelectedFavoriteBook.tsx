@@ -6,9 +6,20 @@ const SelectedFavoriteBook: React.FC<IFavoriteList> = ({setIsVisible, currBook})
 
     const favoriteBooks = useTypedSelector(state => state.books);
 
+    function closeModal() {
+        setIsVisible(false)
+    };
+
+    useEffect(() => {
+        document.addEventListener('click', closeModal);
+        return () => {
+            document.removeEventListener('click', closeModal)
+        }
+    }, [])
+
     return (
         <div className='favorite-modal-container'>
-            <div className="favorite-modal">
+            <div className="favorite-modal" onClick={e => e.stopPropagation()}>
                 <div className='selected-book-content'>
                     <img src={favoriteBooks.books[currBook!].coverM} alt=""/>
                     <div>

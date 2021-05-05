@@ -67,7 +67,7 @@ const Search: React.FC = () => {
                     type="text"
                     value={userInputTitle}
                     onChange={event => {setStart(true); setUserInputTitle(event.target.value);}}
-                    placeholder='Введите название книги'
+                    placeholder='Введите название книги на английском'
                 />
                 <button className='submit' type="submit" ref={submitRef}> <img src="./img/search.png" alt=""/> </button>
             </form>

@@ -16,8 +16,10 @@ const FavoriteBooks: React.FC = () => {
     }, [favoriteBooks])
 
     function handleDeleteClick(event: React.SyntheticEvent) {
+        
         if (event.target instanceof HTMLElement) {
             dispatchFavorites({type:'DELETE_FAVORITE_BOOK', payload: +event.target.dataset.index!})
+            console.log(event.target)
         }     
     };
 
@@ -43,7 +45,7 @@ const FavoriteBooks: React.FC = () => {
                                         </div>
                                     </div>
                                     <div className='delete-container' onClick={e => e.stopPropagation()}>
-                                        <button data-index={i} onClick={handleDeleteClick} className='delete-button'><img src="./img/delete.png" alt=""/></button>
+                                        <button className='delete-button'><img src="./img/delete.png" alt="" data-index={i} onClick={handleDeleteClick}/></button>
                                         <p>Убрать из избранного</p>
                                     </div>
                                 </li>
