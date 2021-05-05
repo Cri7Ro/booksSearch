@@ -34,12 +34,6 @@ const Search: React.FC = () => {
         if (!searchBooks.loader) bookRequest(searchDispatch, isError, get, userInputTitle);
     };
 
-    useLayoutEffect(() => {
-        if (searchRef && submitRef) {
-            submitRef.current!.style.height = searchRef.current!.offsetHeight + 'px';
-        }
-    }, [searchRef, submitRef])
-
     useEffect(() => {
         if (searchRef && submitRef) {
             if (!searchRef.current?.classList.contains('open') && !submitRef.current?.classList.contains('open')) {  

@@ -4,7 +4,6 @@ export default async function bookRequest(searchDispatch: any, isError: boolean,
     searchDispatch({type: 'CLEAR_BOOKLIST'});
     searchDispatch({type: 'SET_LOADER', payload: true});
     searchDispatch({type: 'SET_ERROR', payload: ''});
-    console.log(userInputTitle)
     try {
         const data = await get(`http://openlibrary.org/search.json?title=${userInputTitle}`);
         if (data.numFound === 0) throw new Error();

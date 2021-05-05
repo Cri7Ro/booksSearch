@@ -104,6 +104,7 @@ code {
                 }
             }
             .submit {
+                height: 3.6rem;
                 border: 0;
                 background-color: #fff;
                 border-radius: 0 25px 25px 0;
@@ -191,8 +192,10 @@ code {
         background-color: rgba(0, 0, 0, 0.9);
         padding: 1.5rem;
         max-width: 70vw;
+        color: #b7c82e;
+        display: flex;
+        align-items: flex-start;
         .books {
-            color: #b7c82e;
             display: grid;
             grid-template-columns: repeat(3, auto);
             gap: 5rem;

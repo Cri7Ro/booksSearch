@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import SelectedBook from '../Search/SelectedBook';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import SelectedFavoriteBook from './SelectedFavoriteBook';
@@ -16,10 +15,8 @@ const FavoriteBooks: React.FC = () => {
     }, [favoriteBooks])
 
     function handleDeleteClick(event: React.SyntheticEvent) {
-        
         if (event.target instanceof HTMLElement) {
             dispatchFavorites({type:'DELETE_FAVORITE_BOOK', payload: +event.target.dataset.index!})
-            console.log(event.target)
         }     
     };
 
@@ -33,26 +30,29 @@ const FavoriteBooks: React.FC = () => {
 
     return (
         <section className='favorites'>
-            <ul className='books' onClick={handleInfoClick}>
-                {
-                    !(favoriteBooks.books.length === 0) ? favoriteBooks.books.map((e: any, i: number) => 
-                                <li key={i.toString()} className='favorite-item' data-index={i}>
-                                    <div className='favorite-item-content' data-index={i}>
-                                        <img src={e.coverS} alt="" data-index={i} className='snippet-img'/>  
-                                        <div className='snippet-text' data-index={i}>
-                                            <p data-index={i}>Title: {e.title}</p>
-                                            <p data-index={i}>Author: {e.author}</p>
-                                        </div>
-                                    </div>
-                                    <div className='delete-container' onClick={e => e.stopPropagation()}>
-                                        <button className='delete-button'><img src="./img/delete.png" alt="" data-index={i} onClick={handleDeleteClick}/></button>
-                                        <p>Убрать из избранного</p>
-                                    </div>
-                                </li>
-                    )
-                    : <p>Список избранных пуст</p>  
-                }
-            </ul>
+            {
+                !(favoriteBooks.books.length === 0) ?
+                    <ul className='books' onClick={handleInfoClick}>
+                            {
+                                favoriteBooks.books.map((e: any, i: number) => 
+                                            <li key={i.toString()} className='favorite-item' data-index={i}>
+                                                <div className='favorite-item-content' data-index={i}>
+                                                    <img src={e.coverS} alt="" data-index={i} className='snippet-img'/>  
+                                                    <div className='snippet-text' data-index={i}>
+                                                        <p data-index={i}>Title: {e.title}</p>
+                                                        <p data-index={i}>Author: {e.author}</p>
+                                                    </div>
+                                                </div>
+                                                <div className='delete-container' onClick={e => e.stopPropagation()}>
+                                                    <button className='delete-button'><img src="./img/delete.png" alt="" data-index={i} onClick={handleDeleteClick}/></button>
+                                                    <p>Убрать из избранного</p>
+                                                </div>
+                                            </li>
+                                )
+                            }
+                    </ul>
+                : <p className='empty-favorite-list'>Список избранных пуст</p>
+            }
             {isVisible ? <SelectedFavoriteBook currBook={currFavoriteBook} setIsVisible={setIsVisible}/> : null}
         </section>
     );
