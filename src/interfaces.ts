@@ -7,7 +7,7 @@ export interface IBookInfo {
     isbn10?: string,
     isbn13?: string,
     publishers?: string,
-    description?: string | object 
+    description?: string | object, 
 };
 
 export interface Iinfo {
@@ -26,6 +26,7 @@ export interface ISearch {
 };
 
 export interface IFavoriteBooks {
+    currentBook: number | null,
     books: IBookInfo[]
 };
 
@@ -38,6 +39,7 @@ type currBook = number | null;
 export interface IBooksList {
     setIsVisible: (value: boolean | ((prevHeight: boolean) => boolean)) => void,
     setCurrBook: (value: currBook | ((prevHeight: currBook) => currBook)) => void,
+    
 };
 
 export type get = (url: string) => any;
@@ -46,4 +48,9 @@ export interface ISearchBooks {
     bookList?: IBookInfo[], 
     loader?: boolean, 
     error?: string
+};
+
+export interface IFavoriteList {
+    setIsVisible: (value: boolean | ((prevHeight: boolean) => boolean)) => void,
+    currBook: currBook
 };

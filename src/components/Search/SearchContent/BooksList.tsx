@@ -7,7 +7,7 @@ const BooksList: React.FC<IBooksList> = ({setIsVisible, setCurrBook}) => {
     const searchBooks = useTypedSelector(state => state.search);
 
     function handleClick(li: React.SyntheticEvent<EventTarget>): void {
-        if (!(li.target instanceof HTMLElement)) {
+        if (!(li.target instanceof HTMLImageElement || li.target instanceof HTMLParagraphElement)) {
             return;
           }
        
@@ -22,7 +22,7 @@ const BooksList: React.FC<IBooksList> = ({setIsVisible, setCurrBook}) => {
             {
                 searchBooks.bookList ? searchBooks.bookList.map((e: any, i: number) =>  
                     <li key={i.toString()}  data-index={i}>
-                        <img src={e.coverS} alt="" data-index={i}/>  
+                        <img src={e.coverS} alt="" data-index={i} className='snippet-img'/>  
                         <div className='snippet-text'>
                             <p data-index={i}>Title: {e.title}</p>
                             <p data-index={i}>Author: {e.author}</p>

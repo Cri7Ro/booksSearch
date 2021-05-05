@@ -40,6 +40,15 @@ code {
     background-image: url('./bookscan2.jpg');
     display: flex;
     justify-content: center;
+    .snippet-text,
+    .snippet-img {
+        cursor: pointer;
+    }
+    .snippet-text {
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+    }
     .main-content {
         padding: 0 1rem;
         opacity: .9;
@@ -67,7 +76,6 @@ code {
                 align-items: center;
                 padding-left: .5rem;
                 gap: 15px;
-                cursor: pointer;
             }
             li:last-child {
                 margin-bottom: 0;
@@ -114,11 +122,8 @@ code {
             left: 0;
             width: 100vw;
             height: 100vh;
-            color: white;
             background-color: rgba(0, 0, 0, 0.7);
             color: black;
-            display: flex;
-            flex-direction: column;
             overflow-y: scroll;
             padding-top: 30vh;
             padding-left: 50vw;
@@ -126,7 +131,6 @@ code {
                 position: relative;
                 overflow: scroll;
                 width: 50vw;
-                background-color: #fff;
                 transform: translateX(-50%);
                 padding: 1rem;
                 border: 30px solid;
@@ -183,7 +187,91 @@ code {
             }
         }
     }
-    .books {
-        color: white;
+    .favorites {
+        background-color: rgba(0, 0, 0, 0.9);
+        padding: 1.5rem;
+        max-width: 70vw;
+        .books {
+            color: #b7c82e;
+            display: grid;
+            grid-template-columns: repeat(3, auto);
+            gap: 5rem;
+            .favorite-item {
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 5rem;
+                &-content {
+                    display: flex;
+                    gap: .5rem;
+                }
+                .delete-container {
+                    display: flex;
+                    align-items: center;
+                    .delete-button {
+                        width: 48px;
+                        padding: 0;
+                        background-color: inherit;
+                        align-self: flex-end;
+                        border: none;
+                        cursor: pointer;
+                        &:focus {
+                            outline: none;
+                        }
+                    }
+                }
+            }
+        }
+        .favorite-modal-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: black;
+            overflow-y: scroll;
+            padding-top: 30vh;
+            padding-left: 50vw;
+            .favorite-modal {
+                position: relative;
+                overflow: scroll;
+                width: 50vw;
+                transform: translateX(-50%);
+                padding: 1rem;
+                border: 30px solid;
+                color: #b7c82e;
+                border-image: url(./favorite_border.png) 50 round round;
+                background-color: rgba(57, 57, 57, 1);
+                scrollbar-width: none;
+                &::-webkit-scrollbar {
+                    width: 0;
+                }
+                .description {
+                    width: 100%;
+                    line-height: 1.5rem;
+                }
+                .selected-book-content {
+                    display: flex;
+                    margin-bottom: 1rem;
+                    line-height: 1.7rem;
+                    img {
+                        margin-right: 1rem;
+                    }
+                    div {
+                        max-width: 50%;
+                    }
+                }
+                .close-modal {
+                    position: absolute;
+                    right: 0;
+                    border: none;
+                    background: none;
+                    cursor: pointer;
+                    &:focus {
+                        outline: none;
+                    }
+                }
+            }
+        }
     }
 }
